@@ -9,6 +9,8 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 
 public sealed partial class Nutritious : RMCChemicalEffect
 {
+    public override string Abbreviation => "NTR";
+
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var updatedFactor = NutrimentFactor + ActualPotency;
