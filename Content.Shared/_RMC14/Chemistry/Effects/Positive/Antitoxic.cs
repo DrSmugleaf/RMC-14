@@ -3,15 +3,12 @@ using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
-using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
 public sealed partial class Antitoxic : RMCChemicalEffect
 {
-    private static readonly ProtoId<StatusEffectPrototype> Unconscious = "Unconscious";
-
     public override string Abbreviation => "ATX";
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
@@ -41,8 +38,8 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
-        var knockout = System<RMCSizeStunSystem>(args);
+        var knockOut = System<RMCSizeStunSystem>(args);
         if (ProbHundred(5))
-            knockout.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(10), true);
+            knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(10), true);
     }
 }

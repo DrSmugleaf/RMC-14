@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Emote;
+using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Temperature;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Damage;
@@ -72,7 +73,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var stun = System<SharedStunSystem>(args);
-        stun.TryParalyze(args.TargetEntity, TimeSpan.FromSeconds(2), true);
+        var knockOut = System<RMCSizeStunSystem>(args);
+        knockOut.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(40), true);
     }
 }
