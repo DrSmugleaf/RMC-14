@@ -1,13 +1,10 @@
 ﻿using Content.Shared._RMC14.Body;
-using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Stun;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.StatusEffect;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Random;
 
 namespace Content.Shared._RMC14.Chemistry.Effects.Positive;
 
@@ -27,15 +24,13 @@ public sealed partial class Antitoxic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
-        var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, ToxinGroup, potency * 2f);
+        TryHealDamageGroup(args, ToxinGroup, potency * 2f);
 
         // TODO RMC14 remove genetic heal once other meds are in for genetic damage
-        healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, GeneticGroup, potency * 2f, healing);
-        damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
+        TryHealDamageGroup(args, GeneticGroup, potency * 2f);
 
-        var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        bloodstream.RemoveBloodstreamToxins(args.TargetEntity, 0.125f);
+        var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
+        rmcBloodstream.RemoveBloodstreamToxins(args.TargetEntity, 0.125f);
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
@@ -46,16 +41,8 @@ public sealed partial class Antitoxic : RMCChemicalEffect
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         // TODO RMC14 Drowsiness. if drowsiness > 10 5% change to paralyze(knockout) for 10 seconds.
-        var random = IoCManager.Resolve<IRobustRandom>();
-        if (!random.Prob(0.05f))
-            return;
-
-        var status = args.EntityManager.System<StatusEffectsSystem>();
-        status.TryAddStatusEffect<RMCUnconsciousComponent>(
-            args.TargetEntity,
-            Unconscious,
-            TimeSpan.FromSeconds(10),
-            true
-        );
+        var knockout = System<RMCSizeStunSystem>(args);
+        if (ProbHundred(5))
+            knockout.TryKnockOut(args.TargetEntity, TimeSpan.FromSeconds(10), true);
     }
 }
