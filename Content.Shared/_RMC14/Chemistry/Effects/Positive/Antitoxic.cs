@@ -16,7 +16,7 @@ public sealed partial class Antitoxic : RMCChemicalEffect
         var healing = PotencyPerSecond * 2;
         return $"Heals [color=green]{healing}[/color] toxin damage and removes [color=green]0.125[/color] units of toxic chemicals from the bloodstream.\n" +
                //$"Overdoses cause [color=red]{PotencyPerSecond}[/color] damage to the eyes.\n" +
-               $"Critical overdoses cause [color=red]5[/color] seconds of unconsciousness with a [color=red]5%[/color] chance";
+               $"Critical overdoses cause a [color=red]5%[/color] chance to inflict [color=red]10[/color] seconds of unconsciousness";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

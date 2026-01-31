@@ -6,7 +6,6 @@ using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.FixedPoint;
 using Content.Shared.Popups;
-using Content.Shared.Stunnable;
 using Content.Shared.Temperature;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
@@ -25,7 +24,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
         // TODO RMC14 agony
         return $"Raises body temperature by [color=red]{Potency * 2}ºC[/color], up to a maximum of 120ºC (248ºF).\n" +
                $"Overdoses raise body temperature by [color=red]{Potency * 5}ºC[/color], up to a maximum of 120ºC (248ºF).\n" +
-               $"Critical overdoses paralyze for [color=red]2[/color] seconds.";
+               $"Critical overdoses paralyze for [color=red]40[/color] seconds.";
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

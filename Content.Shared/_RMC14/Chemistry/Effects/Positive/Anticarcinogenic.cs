@@ -28,6 +28,6 @@ public sealed partial class Anticarcinogenic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        TryChangeDamage(args, BluntType, potency * 2f);
+        TryChangeDamage(args, BluntType, potency * 2);
     }
 }
