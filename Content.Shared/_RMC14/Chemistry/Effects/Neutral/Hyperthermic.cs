@@ -29,7 +29,7 @@ public sealed partial class Hyperthermic : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        if (ProbHundred(10))
+        if (ProbHundred(5))
         {
             var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();
             emoteSystem.TryEmoteWithChat(

@@ -11,9 +11,6 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Negative;
 
 public sealed partial class Hypoxemic : RMCChemicalEffect
 {
-    private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
-    private static readonly ProtoId<DamageTypePrototype> PoisonType = "Poison";
-    private static readonly ProtoId<DamageTypePrototype> AsphyxiationType = "Asphyxiation";
     private static readonly ProtoId<EmotePrototype> GaspEmote = "Gasp";
 
     public override string Abbreviation => "HPX";

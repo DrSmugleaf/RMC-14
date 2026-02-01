@@ -1,8 +1,9 @@
 using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Mute;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Prototypes;
 using Content.Shared.Drunk;
 using Content.Shared.EntityEffects;
+using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Speech.EntitySystems;
@@ -29,34 +30,37 @@ public sealed partial class Focusing : RMCChemicalEffect
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var bloodstream = args.EntityManager.System<SharedRMCBloodstreamSystem>();
-        var drunkSystem = args.EntityManager.System<SharedDrunkSystem>();
-        var stutterSystem = args.EntityManager.System<SharedStutteringSystem>();
-        var statusEffects = args.EntityManager.System<SharedStatusEffectsSystem>();
+        var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
+        var drunkSys = System<SharedDrunkSystem>(args);
+        var stutterSys = System<SharedStutteringSystem>(args);
+        var status = System<SharedStatusEffectsSystem>(args);
 
-        bloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        drunkSystem.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
-        stutterSystem.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
-        statusEffects.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2));
+        rmcBloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
+        drunkSys.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
+        stutterSys.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
+        status.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2));
         // ReduceEyeBlur(PotencyPerSecond * 2) but BlurryVisionComponent is sealed so only healing the eyes will remove blur.
 
-        if (!(Potency >= 3))
-            return;
-        args.EntityManager.EntitySysManager.GetEntitySystem<BlindableSystem>().AdjustEyeDamage(args.TargetEntity, -9);
-        args.EntityManager.RemoveComponent<MutedComponent>(args.TargetEntity);
+        if (Potency >= 3)
+        {
+            if (TryComp(args, out BlindableComponent? blindable))
+            {
+                var blindableSys = System<BlindableSystem>(args);
+                blindableSys.AdjustEyeDamage((args.TargetEntity, blindable), -blindable.EyeDamage); // negative to heal
+            }
+
+            args.EntityManager.RemoveComponent<RMCMutedComponent>(args.TargetEntity);
+            args.EntityManager.RemoveComponent<MutedComponent>(args.TargetEntity);
+        }
     }
 
     protected override void TickOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-        damage.DamageDict[PoisonType] = potency;
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+        TryChangeDamage(args, PoisonType, potency);
     }
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
-        var damage = new DamageSpecifier();
-        damage.DamageDict[PoisonType] = potency * 3;
-        damageable.TryChangeDamage(args.TargetEntity, damage, true, interruptsDoAfters: false);
+        TryChangeDamage(args, PoisonType, potency * 3);
     }
 }
