@@ -195418,7 +195418,7 @@ entities:
   - uid: 22079
     components:
     - type: MetaData
-      name: KMCC Interstellar Freight Hub
+      name: TMCC Interstellar Freight Hub
     - type: Transform
       pos: -18.5,-111.5
       parent: 1
@@ -195432,14 +195432,14 @@ entities:
   - uid: 22081
     components:
     - type: MetaData
-      name: KMCC Departures
+      name: TMCC Departures
     - type: Transform
       pos: -35.5,-162.5
       parent: 1
   - uid: 22082
     components:
     - type: MetaData
-      name: KMCC Mining Outpost South
+      name: TMCC Mining Outpost South
     - type: Transform
       pos: -28.5,-181.5
       parent: 1
@@ -195453,7 +195453,7 @@ entities:
   - uid: 22084
     components:
     - type: MetaData
-      name: KMCC Mining Outpost SE
+      name: TMCC Mining Outpost SE
     - type: Transform
       pos: -28.5,-207.5
       parent: 1

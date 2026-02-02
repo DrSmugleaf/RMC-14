@@ -4,7 +4,7 @@ meta:
   engineVersion: 264.0.2
   forkId: ""
   forkVersion: ""
-  time: 01/25/2026 23:36:41
+  time: 01/28/2026 02:32:31
   entityCount: 34514
 maps:
 - 1
@@ -2265,6 +2265,8 @@ entities:
             1763: 230,31
             1764: 231,31
             1778: 233,39
+            1865: 112,148
+            1866: 111,148
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalStrataMud2
@@ -2313,6 +2315,7 @@ entities:
             1790: 71,45
             1791: 70,45
             1833: 80,60
+            1862: 117,150
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalStrataMud3
@@ -2624,6 +2627,8 @@ entities:
             1844: 73,57
             1847: 79,53
             1861: 79,101
+            1863: 110,149
+            1864: 113,148
         - node:
             color: '#FFFFFFFF'
             id: RMCDecalStrataMud7
@@ -75333,7 +75338,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 7656.8256765
     - type: Door
-      secondsUntilStateChange: -10885.805
+      secondsUntilStateChange: -11055.096
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -75347,7 +75352,7 @@ entities:
     - type: CMDoubleDoor
       lastOpeningAt: 7656.8256765
     - type: Door
-      secondsUntilStateChange: -10885.805
+      secondsUntilStateChange: -11055.096
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -123213,25 +123218,10 @@ entities:
     - type: Transform
       pos: 211.5,122.5
       parent: 1
-  - uid: 11737
-    components:
-    - type: Transform
-      pos: 184.5,143.5
-      parent: 1
-  - uid: 11738
-    components:
-    - type: Transform
-      pos: 185.5,144.5
-      parent: 1
   - uid: 11739
     components:
     - type: Transform
       pos: 230.5,42.5
-      parent: 1
-  - uid: 11740
-    components:
-    - type: Transform
-      pos: 134.5,41.5
       parent: 1
   - uid: 11741
     components:
@@ -123242,11 +123232,6 @@ entities:
     components:
     - type: Transform
       pos: 140.5,151.5
-      parent: 1
-  - uid: 11743
-    components:
-    - type: Transform
-      pos: 143.5,152.5
       parent: 1
   - uid: 11744
     components:
@@ -123267,31 +123252,6 @@ entities:
     components:
     - type: Transform
       pos: 144.5,158.5
-      parent: 1
-  - uid: 11748
-    components:
-    - type: Transform
-      pos: 115.5,157.5
-      parent: 1
-  - uid: 11749
-    components:
-    - type: Transform
-      pos: 119.5,148.5
-      parent: 1
-  - uid: 11750
-    components:
-    - type: Transform
-      pos: 115.5,161.5
-      parent: 1
-  - uid: 11751
-    components:
-    - type: Transform
-      pos: 104.5,166.5
-      parent: 1
-  - uid: 11752
-    components:
-    - type: Transform
-      pos: 109.5,155.5
       parent: 1
   - uid: 11753
     components:
@@ -123323,11 +123283,6 @@ entities:
     - type: Transform
       pos: 35.5,130.5
       parent: 1
-  - uid: 11759
-    components:
-    - type: Transform
-      pos: 35.5,137.5
-      parent: 1
   - uid: 11760
     components:
     - type: Transform
@@ -123342,11 +123297,6 @@ entities:
     components:
     - type: Transform
       pos: 102.5,138.5
-      parent: 1
-  - uid: 11763
-    components:
-    - type: Transform
-      pos: 98.5,142.5
       parent: 1
 - proto: RMCSpawnerCorpseChef
   entities:
@@ -123439,6 +123389,63 @@ entities:
     components:
     - type: Transform
       pos: 102.5,58.5
+      parent: 1
+- proto: RMCSpawnerCorpseSPPSoldier
+  entities:
+  - uid: 1445
+    components:
+    - type: Transform
+      pos: 184.5,143.5
+      parent: 1
+  - uid: 11737
+    components:
+    - type: Transform
+      pos: 185.5,144.5
+      parent: 1
+  - uid: 11738
+    components:
+    - type: Transform
+      pos: 134.5,41.5
+      parent: 1
+  - uid: 11740
+    components:
+    - type: Transform
+      pos: 143.5,152.5
+      parent: 1
+  - uid: 11743
+    components:
+    - type: Transform
+      pos: 115.5,157.5
+      parent: 1
+  - uid: 11748
+    components:
+    - type: Transform
+      pos: 119.5,148.5
+      parent: 1
+  - uid: 11749
+    components:
+    - type: Transform
+      pos: 115.5,161.5
+      parent: 1
+  - uid: 11750
+    components:
+    - type: Transform
+      pos: 104.5,166.5
+      parent: 1
+  - uid: 11751
+    components:
+    - type: Transform
+      pos: 109.5,155.5
+      parent: 1
+  - uid: 11752
+    components:
+    - type: Transform
+      pos: 35.5,137.5
+      parent: 1
+  - uid: 11759
+    components:
+    - type: Transform
+      pos: 98.5,142.5
       parent: 1
 - proto: RMCSpawnerFigurinePatron
   entities:
