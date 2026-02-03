@@ -157,7 +157,6 @@ public abstract partial class RMCChemicalEffect : EntityEffect
     {
         var rmcDamageable = args.EntityManager.System<SharedRMCDamageableSystem>();
         var healing = rmcDamageable.DistributeHealingCached(args.TargetEntity, group, amount);
-
         var damageable = args.EntityManager.System<DamageableSystem>();
         damageable.TryChangeDamage(args.TargetEntity, healing, true, interruptsDoAfters: false);
     }
