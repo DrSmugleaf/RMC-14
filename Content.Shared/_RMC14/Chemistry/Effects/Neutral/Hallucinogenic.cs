@@ -15,7 +15,7 @@ namespace Content.Shared._RMC14.Chemistry.Effects.Neutral;
 public sealed partial class Hallucinogenic : RMCChemicalEffect
 {
     private static readonly EntProtoId<StatusEffectComponent> Druggy = "StatusEffectSeeingRainbow";
-    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("twitch", "drool", "moan", "giggle");
+    private static readonly ImmutableArray<string> Emotes = ImmutableArray.Create("twitches", "drools", "moans", "giggles");
 
     public override string Abbreviation => "HLG";
 

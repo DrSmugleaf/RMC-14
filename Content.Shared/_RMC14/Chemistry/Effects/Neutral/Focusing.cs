@@ -1,4 +1,5 @@
 using Content.Shared._RMC14.Body;
+using Content.Shared._RMC14.Drowsyness;
 using Content.Shared._RMC14.Mute;
 using Content.Shared.Damage;
 using Content.Shared.Drunk;
@@ -31,20 +32,23 @@ public sealed partial class Focusing : RMCChemicalEffect
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
         var rmcBloodstream = System<SharedRMCBloodstreamSystem>(args);
-        var drunkSys = System<SharedDrunkSystem>(args);
         var stutterSys = System<SharedStutteringSystem>(args);
+        var drunkSys = System<SharedDrunkSystem>(args);
+        var drowsySys = System<DrowsynessSystem>(args);
         var status = System<SharedStatusEffectsSystem>(args);
 
         rmcBloodstream.RemoveBloodstreamAlcohols(args.TargetEntity, potency);
-        drunkSys.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
         stutterSys.DoRemoveStutterTime(args.TargetEntity, PotencyPerSecond * 2);
-        status.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2));
-        // ReduceEyeBlur(PotencyPerSecond * 2) but BlurryVisionComponent is sealed so only healing the eyes will remove blur.
+        drunkSys.TryRemoveDrunkenessTime(args.TargetEntity, PotencyPerSecond * 2);
+        drowsySys.TryChange(args.TargetEntity, PotencyPerSecond * -2);
+        status.TryAddTime(args.TargetEntity, "Jitter", TimeSpan.FromSeconds(PotencyPerSecond * -2)); // TODO RMC14 amplitude frequency
+        // TODO RMC14 M.ReduceEyeBlur(PotencyPerSecond * 2) remove blur without healing eyes
 
         if (Potency >= 3)
         {
             if (TryComp(args, out BlindableComponent? blindable))
             {
+                // TODO RMC14 M.SetEyeBlind(0) remove blind without healing eyes
                 var blindableSys = System<BlindableSystem>(args);
                 blindableSys.AdjustEyeDamage((args.TargetEntity, blindable), -blindable.EyeDamage); // negative to heal
             }

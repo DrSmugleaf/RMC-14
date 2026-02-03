@@ -28,6 +28,7 @@ public sealed partial class Carcinogenic : RMCChemicalEffect
 
     protected override void TickCriticalOverdose(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {
+        // TODO RMC14 one limb at random
         TryChangeDamage(args, BluntType, potency * 2);
     }
 }

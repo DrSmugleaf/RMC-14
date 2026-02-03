@@ -55,7 +55,7 @@ public sealed partial class Antispasmodic : RMCChemicalEffect
 
         var popup = System<SharedPopupSystem>(args);
         var net = IoCManager.Resolve<INetManager>();
-        if (net.IsServer && ProbHundred(5))
+        if (net.IsServer && ProbHundred(10))
             popup.PopupClient("You feel incredibly weak!", args.TargetEntity, args.TargetEntity);
     }
 

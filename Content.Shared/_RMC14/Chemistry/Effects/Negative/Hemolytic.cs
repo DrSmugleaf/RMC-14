@@ -53,7 +53,7 @@ public sealed partial class Hemolytic : RMCChemicalEffect
         speed.Multiplier = FixedPoint2.Max(SpeedMultiplier, 1 - potency.Float() * SpeedMultiplier).Float();
         speed.AppliedAt = IoCManager.Resolve<IGameTiming>().CurTime;
 
-        if (!ProbHundred(10))
+        if (!ProbHundred(5))
             return;
 
         var emoteSystem = args.EntityManager.System<SharedRMCEmoteSystem>();

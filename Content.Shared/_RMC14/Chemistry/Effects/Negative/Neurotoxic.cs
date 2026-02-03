@@ -44,7 +44,7 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
             true
         );
 
-        if (ProbHundred(25))
+        if (ProbHundred(50))
         {
             if (TryComp(args, out DrowsynessComponent? drowsyness))
             {
@@ -53,7 +53,7 @@ public sealed partial class Neurotoxic : RMCChemicalEffect
             }
         }
 
-        if (ProbHundred(5))
+        if (ProbHundred(10))
         {
             var chat = System<SharedCMChatSystem>(args);
             chat.Emote(args.TargetEntity, "drools");
