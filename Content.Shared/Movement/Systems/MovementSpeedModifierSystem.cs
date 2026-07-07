@@ -113,6 +113,9 @@ namespace Content.Shared.Movement.Systems
 
         public void ChangeBaseSpeed(EntityUid uid, float baseWalkSpeed, float baseSprintSpeed, float acceleration, MovementSpeedModifierComponent? move = null)
         {
+            if (_timing.ApplyingState)
+                return;
+
             if (!Resolve(uid, ref move, false))
                 return;
 
